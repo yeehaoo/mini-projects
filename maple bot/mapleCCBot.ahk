@@ -1,5 +1,4 @@
-;Welcome to mapleCCbot
-;Work in progress, use at your own risk ;)
+MsgBox Welcome to mapleBot! You are now using: CC Bot. This is a work in progress, please use at your own risk :)
 
 ;Press Escape to exit the script.
 Esc::ExitApp
