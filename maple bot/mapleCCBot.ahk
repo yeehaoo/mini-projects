@@ -51,10 +51,5 @@ Return
 	Sleep 5000
 	Send {+} {Right} {Enter}
 	Sleep 5000
-Return
-
-;Ability Spamming (work in progress, do not use)
-;Press ctrl+ Numpad3 to spam CTRL ability
-^Numpad3::
-	Send {Enter 30000}
+	MsgBox The 20 channel cycle has ended. Please press ctrl+Numpad2 to start another cycle.
 Return
