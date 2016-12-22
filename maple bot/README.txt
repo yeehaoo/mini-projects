@@ -12,6 +12,7 @@ Current Features:
 Features in Development:
 -Ability Spamming
 -Buff hotkeys with timing
+-Chat spamming (for selling stuff)
 
 mapleCCBot Documentation:
 
