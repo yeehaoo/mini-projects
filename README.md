@@ -1,2 +1,2 @@
 # mini-projects
-This repository is just a bunch of random projects I decided to do in my free time, for fun.
+Recreational Projects that don't deserve their own repository
