@@ -3,7 +3,7 @@ import random as rand
 
 class Creature:
     
-    def __init__(self, lvlAtt, lvlStr, lvlDef, lvlHP):
+    def __init__(self, lvlAtt=1, lvlStr=1, lvlDef=1, lvlHP=3):
 
         if(lvlAtt > 99):
             lvlAtt = 99
