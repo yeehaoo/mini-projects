@@ -27,14 +27,16 @@ class Root(tk.Tk):
         self.btnWithdraw.pack()
 
     def deposit(self):
-        amount = int(self.entry.get())
-        self.balance += amount
-        self.lblAmount.configure(text=self.balance)
+        if(self.entry.get() != ""):
+            amount = int(self.entry.get())
+            self.balance += amount
+            self.lblAmount.configure(text=self.balance)
 
     def withdraw(self):
-        amount = int(self.entry.get())
-        self.balance -= amount
-        self.lblAmount.configure(text=self.balance)
+        if(self.entry.get() != ""):
+            amount = int(self.entry.get())
+            self.balance -= amount
+            self.lblAmount.configure(text=self.balance)
         
 if __name__ == "__main__":
     root = Root()
