@@ -1,6 +1,10 @@
 import requests
+import win32clipboard
 
-url = "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg"
+win32clipboard.OpenClipboard()
+url = win32clipboard.GetClipboardData()
+win32clipboard.CloseClipboard()
+
 response = requests.get(url)
 if response.status_code == 200:
     with open("./file.jpg", 'wb') as f:
