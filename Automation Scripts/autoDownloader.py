@@ -30,4 +30,4 @@ for folderName, subfolders, filenames in os.walk('./'):
 response = requests.get(url)
 if response.status_code == 200:
     with open('./' + str(count+1) + url[-4:], 'wb') as f:
-f.write(response.content)
+        f.write(response.content)
