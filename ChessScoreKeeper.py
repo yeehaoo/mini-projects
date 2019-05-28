@@ -7,7 +7,7 @@ root = tk.Tk()
 #define win count, total game count and initialise as 0
 #initialise last action as 0 so that undoing a 0/0 score does nothing
 winCnt = tk.DoubleVar()
-totalCnt = tk.DoubleVar()
+totalCnt = tk.IntVar()
 winCnt.set(0)
 totalCnt.set(0)
 lastAction = -1
