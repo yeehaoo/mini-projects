@@ -12,4 +12,4 @@ Features:
 
 Features to add:
  - Calendar widget highlighting workout days
-~~ - Check if today's date was entered, block double entry~~
+ - ~~Check if today's date was entered, block double entry~~
