@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE sessions (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE DATE )");
+        db.execSQL("CREATE TABLE sessions (ID INTEGER PRIMARY KEY AUTOINCREMENT, TEXT DATE )");
     }
 
     @Override
@@ -33,11 +33,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(Calendar date) {
+    public boolean insertData(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("date", date.toString());
+        contentValues.put("date", date);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1)
@@ -52,8 +52,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getLatestData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT date FROM " + TABLE_NAME + " WHERE ID = (SELECT MAX(ID) FROM sessions)", null);
+        return res;
+    }
+
     public void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM sessions");
+    }
+
+    public void dropTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE sessions");
+    }
+
+    public void createTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("CREATE TABLE sessions (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT )");
     }
 }

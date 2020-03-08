@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,20 +41,53 @@ public class MainActivity extends AppCompatActivity {
         tv_ppe = findViewById(R.id.tv_ppe);
 
         mydb = new DatabaseHelper(getApplicationContext());
+//        mydb.dropTable();
+//        mydb.createTable();
         refresh();
     }
 
     public void reset() {
+
+//        mydb.dropTable();
+
         mydb.deleteAllData();
         refresh();
+
     }
 
     public void logWorkout() {
+
+        //get current date > convert to string as per format > print
         Calendar now = Calendar.getInstance();
-        boolean isInserted = mydb.insertData(now);
-        if (!isInserted)
-            Toast.makeText(getApplicationContext(),"Error logging workout",Toast.LENGTH_LONG);
-        refresh();
+        String pattern = "ddMMyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        String nowStr = format.format(now.getTime());
+        System.out.println("Today's date: "+ nowStr);
+
+        //get latest date (row) from db
+        Cursor res = mydb.getLatestData();
+        res.moveToFirst();
+        if(res.getCount() != 0) {
+            //if there are rows, print latest date
+            System.out.println("Date from db: " + res.getString(0));
+            //if latest row and today's date is different, insert the row
+            if (!res.getString(0).equals(nowStr)) {
+                System.out.println("Dates are not equal, db: " + res.getString(0) + " nowStr: " + nowStr);
+                boolean isInserted = mydb.insertData(nowStr);
+                if (!isInserted)
+                    Toast.makeText(getApplicationContext(),"Error logging workout",Toast.LENGTH_LONG);
+                refresh();
+            }
+            System.out.println("Dates are equal, row not added");
+        }
+        else {
+            //if db is empty, insert a row
+            System.out.println("db is empty, row inserted for " + nowStr);
+            boolean isInserted = mydb.insertData(nowStr);
+            if (!isInserted)
+                Toast.makeText(getApplicationContext(), "Error logging workout", Toast.LENGTH_LONG);
+            refresh();
+        }
     }
 
     public void refresh() {
